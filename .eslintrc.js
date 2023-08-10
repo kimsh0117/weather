@@ -7,10 +7,10 @@ module.exports = {
     "plugin:vue/essential",
     "eslint:recommended",
     "@vue/typescript/recommended",
-    "plugin:prettier/recommended",
+    // "plugin:prettier/recommended",
   ],
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2016,
   },
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
