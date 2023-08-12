@@ -4,3 +4,7 @@ export type Geo = {
   lon: number
   name: string
 }
+
+export type GeoStorage = {
+  [city: string]: Geo
+}
