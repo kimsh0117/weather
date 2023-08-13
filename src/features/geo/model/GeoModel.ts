@@ -1,7 +1,7 @@
 // types
 import { GeoStorage } from '@/features/geo/types/type'
 // services
-import GeoFetchService from '@/features/geo/service/Fetch'
+import GeoFetchService from '@/features/geo/service/GeoFetchService'
 import LocalStorage from "@/features/localStorage/service/LocalStorage";
 // constants
 import { WEATHER, WEATHER_API_KEY } from "@/constants";

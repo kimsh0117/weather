@@ -4,7 +4,7 @@ import {observable, makeObservable} from 'mobx'
 import {CurrentWeather} from "@/features/weather/types/type";
 import {GeoStorage} from "@/features/geo/types/type";
 // services
-import WeatherFetchService from "@/features/weather/service/Fetch";
+import WeatherFetchService from "@/features/weather/service/WeatherFetchService";
 import LocalStorageService from "@/features/localStorage/service/LocalStorage";
 import LocalStorage from "@/features/localStorage/service/LocalStorage";
 // constants

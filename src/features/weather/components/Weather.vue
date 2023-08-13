@@ -10,6 +10,8 @@ import SettingIcon from '@/assets/icons/icon-setting.svg';
 import NavigationIcon from '@/assets/icons/icon-navigation.svg';
 // constants
 import { WEATHER_ICON_URL } from "@/constants";
+// service
+import WeatherUtilService from "@/features/weather/service/WeatherUtilService";
 @Observer
 @Component({
   components: {
@@ -26,11 +28,15 @@ export default class Weather extends Vue {
 
   private weathersStorage = WeatherModel.getInstance()
 
+  private weatherUtilService: WeatherUtilService = new WeatherUtilService()
   getIconUrl(id: string) {
-    return `${WEATHER_ICON_URL}${id}@2x.png`
+    return this.weatherUtilService.getIconUrl(id, WEATHER_ICON_URL)
   }
   convertVisibility(visibility: number) {
-    return (visibility / 1000).toFixed(1) + 'km'
+    return this.weatherUtilService.convertVisibility(visibility)
+  }
+  rotateDeg(deg: number) {
+    return this.weatherUtilService.rotateDeg(deg)
   }
 }
 </script>
@@ -55,7 +61,7 @@ export default class Weather extends Vue {
         </p>
       </div>
       <div class="weather__wind">
-        <span class="weather__wind__deg" :style="{transform: `rotate(${values.wind.deg}deg)`}">
+        <span class="weather__wind__deg" :style="{transform: rotateDeg(values.wind.deg)}">
           <navigation-icon />
         </span>
         <span class="weather__wind__speed">{{values.wind.speed}} m/s</span>
