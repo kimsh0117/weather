@@ -9,14 +9,14 @@
 
 <script lang="ts">
 // vendor
-import { Component, Vue  } from "vue-property-decorator";
-import { Observer } from "mobx-vue";
+import {Component, Vue} from "vue-property-decorator";
+import {Observer} from "mobx-vue";
 // components
 import WeatherProvider from "@/features/weather/components/WeatherProvider.vue";
 import Weather from "@/features/weather/components/Weather.vue";
 import WeatherSettings from "@/features/weather/components/WeatherSettings.vue";
-// models
-import GeoModel from "@/features/geo/model/GeoModel";
+// services
+import GeoService from "@/features/geo/service/GeoService";
 
 @Observer
 @Component({
@@ -27,9 +27,9 @@ import GeoModel from "@/features/geo/model/GeoModel";
   },
 })
 export default class App extends Vue {
-  geoModel = GeoModel.getInstance()
+  geoService = GeoService.getInstance()
   mounted() {
-    this.geoModel.initCoordinates()
+    this.geoService.initCoordinates()
   }
 }
 </script>

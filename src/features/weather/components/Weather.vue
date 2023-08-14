@@ -11,7 +11,7 @@ import NavigationIcon from '@/assets/icons/icon-navigation.svg';
 // constants
 import { WEATHER_ICON_URL } from "@/constants";
 // service
-import WeatherUtilService from "@/features/weather/service/WeatherUtilService";
+import WeatherService from "@/features/weather/service/WeatherService";
 @Observer
 @Component({
   components: {
@@ -26,26 +26,27 @@ export default class Weather extends Vue {
   @Prop()
   private actions!: { click: object }
 
-  private weathersStorage = WeatherModel.getInstance()
+  weatherModel = WeatherModel.getInstance()
+  weathers = this.weatherModel.weathers
 
-  private weatherUtilService: WeatherUtilService = new WeatherUtilService()
+  private weatherService: WeatherService =  WeatherService.getInstance()
   getIconUrl(id: string) {
-    return this.weatherUtilService.getIconUrl(id, WEATHER_ICON_URL)
+    return this.weatherService.getIconUrl(id, WEATHER_ICON_URL)
   }
   convertVisibility(visibility: number) {
-    return this.weatherUtilService.convertVisibility(visibility)
+    return this.weatherService.convertVisibility(visibility)
   }
   rotateDeg(deg: number) {
-    return this.weatherUtilService.rotateDeg(deg)
+    return this.weatherService.rotateDeg(deg)
   }
 }
 </script>
 
 <template>
   <div v-if="!state.clicked">
-    <div class="weather" v-for="([city, values], index) in weathersStorage.weathers" v-bind:key="city">
+    <div class="weather" v-for="([city, values], index) in weathers" v-bind:key="city">
       <div class="weather__header">
-        <div>{{city}}, {{values.sys.country}}</div>
+        <div>{{values.name}}, {{values.sys.country}}</div>
         <button v-if="index === 0" v-on:click="actions.click" class="btn">
           <setting-icon />
         </button>
@@ -79,6 +80,10 @@ export default class Weather extends Vue {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 250px;
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
   }
   .weather__header {
     display: flex;

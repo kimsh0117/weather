@@ -1,5 +1,7 @@
 import { CurrentWeather } from "@/features/weather/types/type";
 import { weatherApi } from "@/features/http/service";
+// constants
+import { WEATHER_API_KEY } from "@/constants";
 
 class WeatherFetchService {
   private static _instance: WeatherFetchService
@@ -9,9 +11,14 @@ class WeatherFetchService {
     }
     return WeatherFetchService._instance;
   }
-  public getCurrentWeather({lat, lon, key, units = 'metric'}:  { lat: number; lon: number, key: string, units?: string}): Promise<CurrentWeather> {
+  public getCurrentWeather({lat, lon, units = 'metric'}:  { lat: number; lon: number, units?: string}): Promise<CurrentWeather> {
     return weatherApi
-        .get(`/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=${units}`)
+        .get(`/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`)
+        .then(res => res.data)
+  }
+  public getCurrentWeatherByCityName({name}: { name: string}): Promise<CurrentWeather> {
+    return weatherApi
+        .get(`/data/2.5/weather?q=${name}&appid=${WEATHER_API_KEY}&units=metric`)
         .then(res => res.data)
   }
 }

@@ -35,6 +35,7 @@ export type System = {
   country: string
   sunrise: number
   sunset: number
+  city: string
 }
 export type CurrentWeather = {
   coord: Coordinates
@@ -51,4 +52,9 @@ export type CurrentWeather = {
   id: number
   name: string
   cod: number
+}
+
+export type WeatherForm = {
+  cityName: string,
+  cityNameErrMsg: string,
 }
