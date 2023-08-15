@@ -7,8 +7,6 @@ import "@/styles/index.scss";
 // app
 import App from "@/pages/index.vue";
 
-Vue.config.productionTip = false;
-
 new Vue({
   render: (h) => h(App),
 }).$mount("#app");

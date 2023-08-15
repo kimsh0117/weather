@@ -1,7 +1,6 @@
 import {makeObservable, action, runInAction} from 'mobx'
 // model
 import WeatherModel from "@/features/weather/model/WeatherModel";
-// import GeoModel from "@/features/geo/model/GeoModel";
 // services
 import WeatherFetchService from "@/features/weather/service/WeatherFetchService";
 import LocalStorageService from "@/features/localStorage/service/LocalStorage";
@@ -13,7 +12,6 @@ import {WEATHER} from "@/constants";
 
 class WeatherService {
   private _weatherModel: WeatherModel
-  // private _geoModel: GeoModel
 
   private _weatherFetchService: WeatherFetchService
   private _localStorageService: LocalStorageService
@@ -22,7 +20,6 @@ class WeatherService {
   constructor() {
     makeObservable(this)
     this._weatherModel = WeatherModel.getInstance()
-    // this._geoModel = GeoModel.getInstance()
 
     this._weatherFetchService = WeatherFetchService.getInstance()
     this._localStorageService = LocalStorageService.getInstance()
@@ -68,7 +65,6 @@ class WeatherService {
 
   @action
   swapAandB(aIndex: number, bIndex: number): void {
-    console.log(aIndex, bIndex)
     const reordered = [...this._weatherModel.weathers.entries()]
     this._weatherModel.weathers.clear()
 

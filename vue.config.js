@@ -12,6 +12,13 @@ module.exports = defineConfig({
           loader: 'vue-svg-loader',
         },
       ],
+    },
+    output: {
+      libraryExport: 'default'
     }
-  }
+  },
+  css: {
+    extract: false
+  },
+  productionSourceMap: false
 });

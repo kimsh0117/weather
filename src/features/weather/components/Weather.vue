@@ -1,7 +1,7 @@
 <script lang="ts">
 // vendor
 import 'reflect-metadata'
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import {Vue,Component,Prop} from 'vue-property-decorator';
 import {Observer} from "mobx-vue";
 // models
 import WeatherModel from "@/features/weather/model/WeatherModel";
@@ -9,7 +9,7 @@ import WeatherModel from "@/features/weather/model/WeatherModel";
 import SettingIcon from '@/assets/icons/icon-setting.svg';
 import NavigationIcon from '@/assets/icons/icon-navigation.svg';
 // constants
-import { WEATHER_ICON_URL } from "@/constants";
+import {WEATHER_ICON_URL} from "@/constants";
 // service
 import WeatherService from "@/features/weather/service/WeatherService";
 @Observer
