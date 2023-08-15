@@ -65,6 +65,23 @@ class WeatherService {
       throw Error('nothing to fetch')
     }
   }
+
+  @action
+  swapAandB(aIndex: number, bIndex: number): void {
+    console.log(aIndex, bIndex)
+    const reordered = [...this._weatherModel.weathers.entries()]
+    // console.log('before', reordered)
+    this._weatherModel.weathers.clear()
+
+    const temp = reordered[bIndex]
+    reordered[bIndex] = reordered[aIndex]
+    reordered[aIndex] = temp
+    console.log(reordered)
+    // console.log('after', reordered)
+    reordered.forEach(([city, values]) => {
+      this._weatherModel.weathers.set(city, values);
+    })
+  }
 }
 
 export default WeatherService

@@ -1,9 +1,10 @@
 <script lang="ts">
 import 'reflect-metadata'
-import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import {Vue, Component, Prop} from 'vue-property-decorator';
 import {Observer} from "mobx-vue";
 import {AxiosError} from "axios";
 import {action} from "mobx";
+import draggable from "vuedraggable";
 // components
 import XIcon from '@/assets/icons/icon-x.svg';
 import MenuIcon from '@/assets/icons/icon-menu.svg';
@@ -32,7 +33,8 @@ const initialFormValues = {
     XIcon,
     MenuIcon,
     TrashIcon,
-    SearchIcon
+    SearchIcon,
+    draggable
   }
 })
 export default class WeatherSettings extends Vue {
@@ -87,6 +89,12 @@ export default class WeatherSettings extends Vue {
       }
     }
   }
+
+  @action
+  handleDrag(event: any) {
+    this.localStorageService.setItem<Geo[]>(WEATHER, this.geoModel.geoData)
+    this.weatherService.swapAandB(event.moved.newIndex, event.moved.oldIndex)
+  }
 }
 </script>
 
@@ -97,13 +105,13 @@ export default class WeatherSettings extends Vue {
       <button v-on:click.stop="actions.click" class="btn"><x-icon /></button>
     </div>
 
-    <ul class="weather-settings__list">
+    <draggable tag="ul" v-model="geoModel.geoData" class="weather-settings__list" handle=".menu" @change="handleDrag">
       <li v-for="(value) in geoModel.geoData" :key="value.name" class="weather-settings__list__item">
-        <button class="btn"><menu-icon /></button>
+        <button class="btn menu"><menu-icon /></button>
         <div class="weather-settings__list__item__text">{{value.name}}, {{value.country}}</div>
         <button class="btn weather-settings__list__item__remove" v-on:click.stop="remove(value.name)"><trash-icon /></button>
       </li>
-    </ul>
+    </draggable>
 
     <form class="weather-settings__search" @submit.prevent="formService.handleSubmit(search)">
       <label for="city" class="weather-settings__search__label">Add location:</label>
