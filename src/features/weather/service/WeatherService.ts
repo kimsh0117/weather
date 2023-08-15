@@ -70,14 +70,15 @@ class WeatherService {
   swapAandB(aIndex: number, bIndex: number): void {
     console.log(aIndex, bIndex)
     const reordered = [...this._weatherModel.weathers.entries()]
-    // console.log('before', reordered)
     this._weatherModel.weathers.clear()
 
     const temp = reordered[bIndex]
     reordered[bIndex] = reordered[aIndex]
     reordered[aIndex] = temp
-    console.log(reordered)
-    // console.log('after', reordered)
+
+    // there is bug
+    // i don't know how to fix this bug, reorder not correctly work!
+    // maybe this because i dont have vue experience
     reordered.forEach(([city, values]) => {
       this._weatherModel.weathers.set(city, values);
     })
